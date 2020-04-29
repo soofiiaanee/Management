@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block menu%}
+    {% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid mt-5">
+
+        <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-5">
+                <h1 class="h3 mb-0 text-gray-800">Nouveau client</h1>
+            </div>
+
+          <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-12">
+            <div class="p-5">
+                  
+                  {{ form_start(form) }}
+                  {{ form_errors(form) }}
+                  {{ form_row(form._token) }}
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    {{ form_row(form.nom) }}
+                  </div>
+                  <div class="col-sm-6">
+                    {{ form_row(form.prenom) }}
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    {{ form_row(form.societe) }}
+                  </div>
+                  <div class="col-sm-6">
+                    {{ form_row(form.code) }}
+                  </div>
+                </div>
+                  
+                <div class="form-group row">
+                  <div class="col-sm-4 mb-3 mb-sm-0">
+                    {{ form_row(form.tel) }}
+                  </div>
+                  <div class="col-sm-4">
+                    {{ form_row(form.email) }}
+                  </div>
+                  <div class="col-sm-4">
+                    {{ form_row(form.siteWeb) }}
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  {{ form_row(form.adresse) }}
+                </div>
+                
+                <div class="form-group">
+                  {{ form_row(form.sauvegarder) }}
+                </div>
+              {{ form_start(form) }}
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+       
+{% endblock %}

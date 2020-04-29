@@ -1,0 +1,97 @@
+{% extends "base.html.twig" %}
+
+{% block menu%}
+    {% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid mt-5">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between">
+            <h1 class="h3 mb-0 text-gray-800">Nouvelle vente</h1>
+            {% for flashMessage in app.session.flashbag.get('warning') %}
+                <a href="#" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">{{ flashMessage }}</span>
+                </a>
+            {% endfor %}
+          </div>
+
+          <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-12">
+            <div class="p-5">
+                  
+                  {{ form_start(form) }}
+                  {{ form_errors(form) }}
+                  {{ form_row(form._token) }}
+                <div class="form-group row">
+                  <div class="col-sm-4 mb-3 mb-sm-0">
+                    {{ form_row(form.creeLe) }}
+                  </div>
+                  
+                  <div class="col-sm-4 mb-3 mb-sm-0">
+                    {{ form_row(form.client) }}
+                  </div>
+                  
+                  <div class="col-sm-4 mb-3 mb-sm-0">
+                    {{ form_row(form.Avance) }}
+                  </div>
+                </div>
+                  
+               <div class="form-group row">
+                        <table class="table items" data="grid">
+                            <tbody> 
+                                {% for element in form.elements %} 
+                                    <tr>
+                                        <td >{{ form_row(element.produit) }}</td> 
+                                        <td>{{ form_row(element.quantite) }}</td>                                              
+                                        <td> 
+                                            <a href="#" onclick="deleteItem($(this));return false;"><i class="fa fa-trash-o"></i> </a> 
+                                        </td> 
+                                    </tr> 
+                                {% endfor %} 
+                            </tbody>
+                         </table>
+                            <div id="element_produit" data-prototype="{{ form_widget(form.elements.vars.prototype.produit)|e }}"></div>    
+                            <div id="element_quantite" data-prototype="{{ form_widget(form.elements.vars.prototype.quantite)|e }}"></div>        
+                </div>
+                  
+                <div class="form-group">
+                  {{ form_row(form.sauvegarder) }}
+                </div>
+              {{ form_start(form) }}
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+       
+{% endblock %}
+
+{% block javascripts %}
+    {% include '@App/Vente/helper/CollectionaddElements.html.twig' %}
+{%endblock%}
+

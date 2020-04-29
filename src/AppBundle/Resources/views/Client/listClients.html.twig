@@ -1,0 +1,96 @@
+{% extends "base.html.twig" %}
+
+{% block menu%}
+    {% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid mt-5">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Liste des clients</h1>
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                <a href="#" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">{{ flashMessage }}</span>
+                  </a>
+            {% endfor %}
+            <a href="{{path('creerModifierClient')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-square"></i> Nouveau client</a>
+          </div>
+          
+            <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Code</th>
+                      <th>Prénom</th>
+                      <th>Nom</th>
+                      <th>Société</th>
+                      <th>Tél</th>
+                      <th>Email</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Code</th>
+                      <th>Prénom</th>
+                      <th>Nom</th>
+                      <th>Société</th>
+                      <th>Tel</th>
+                      <th>email</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                      {% for client in clients %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('showClient', {'id':client.id}) }}">
+                                    <b>{{client.code}}</b>
+                                </a>
+                            </td>
+                            <td>{{client.prenom}}</td>
+                            <td>{{client.nom}}</td>
+                            <td>{{client.societe}}</td>
+                            <td>{{client.tel}}</td>
+                            <td>{{client.email}}</td>
+                            <td>
+                                <center>
+                                    <a href="{{ path('creerModifierClient', {'id':client.id}) }}" class="btn btn-primary" style="color:white;"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('deleteClient', {'id':client.id}) }}" onclick="return confirm('Tu es sure de vouloir supprimer ce Client ?')" class="btn bg-gray-800" style="color:white;"><i class="fas fa-trash"></i></a>
+                                </center>
+                            </td>
+                        </tr>
+                      {%endfor%}
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+       
+{% endblock %}

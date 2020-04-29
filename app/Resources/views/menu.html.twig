@@ -1,0 +1,116 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{path('homepage')}}">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Gestion</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="{{path('homepage')}}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Tableau de bord</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Gestion
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Clients</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{path('creerModifierClient')}}">Nouveau client</a>
+            <a class="collapse-item" href="{{path('listClients')}}">Liste des clients</a>
+          </div>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+          <i class="fas fa-fw fa-handshake"></i>
+          <span>Fournisseurs</span>
+        </a>
+        <div id="collapse3" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{path('creerModifierFournisseur')}}">Nouveau fournisseur</a>
+            <a class="collapse-item" href="{{path('listFournisseurs')}}">Liste des fournisseurs</a>
+          </div>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#produit" aria-expanded="true" aria-controls="produit">
+          <i class="fas fa-fw fa-archive"></i>
+          <span>Produits</span>
+        </a>
+        <div id="produit" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{path('creerModifierProduit')}}">Nouveau produit</a>
+            <a class="collapse-item" href="{{path('listProduits')}}">Liste des produits</a>
+          </div>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#inventaire" aria-expanded="true" aria-controls="inventaire">
+          <i class="fas fa-box-open"></i>
+          <span>Inventaire</span>
+        </a>
+        <div id="inventaire" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{path('creerModifierAchat')}}">Nouvel achat</a>
+            <a class="collapse-item" href="{{path('listAchats')}}">Liste des achats</a>
+            <a class="collapse-item" href="{{path('creerModifierVente')}}">Nouvelle vente</a>
+            <a class="collapse-item" href="{{path('listVentes')}}">Liste des ventes</a>
+          </div>
+        </div>
+      </li>
+      
+      <div class="sidebar-heading">
+        Administration
+      </div>
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-tools"></i>
+          <span>Adminisrateurs</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{path('fos_user_registration_register')}}">Nouveau administrateur</a>
+            <a class="collapse-item" href="{{path('admin')}}" target="_blank">Administration</a>
+          </div>
+        </div>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('fos_user_security_logout')}}">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Se Déconnecter</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>

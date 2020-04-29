@@ -1,0 +1,65 @@
+     <script> 
+
+
+    // setup an "add a tag" link 
+    var $addTagLink = $('<a href="#" id="add_element" class="btn btn-primary" style="margin:5px 0 20px 0; float: left;">Ajouter produit</a>'); 
+     
+        var $collectionHolder; 
+        jQuery(document).ready(function() { 
+
+
+
+            // Get the ul that holds the collection of tags 
+            $collectionHolder = $('table.items'); 
+ 
+ 
+        
+            // add the "add a tag" anchor and li to the tags ul 
+            $collectionHolder.after($addTagLink); 
+             
+         
+            // count the current form inputs we have (e.g. 2), use that as the new 
+            // index when inserting a new item (e.g. 2) 
+            $collectionHolder.data('index', $collectionHolder.find("tr").length); 
+ 
+            $addTagLink.on('click', function(e) { 
+                // prevent the link from creating a "#" on the URL 
+                e.preventDefault(); 
+ 
+                // add a new tag form (see next code block) 
+                addTagForm($collectionHolder); 
+            }); 
+        }); 
+ 
+        function addTagForm($collectionHolder) { 
+            // get the new index 
+             
+            var index = $collectionHolder.data('index'); 
+            var prototype = 
+                  "<tr>"+
+                    "<td>"+$("#element_produit").data('prototype')+"</td>"+
+                    "<td>"+$("#element_quantite").data('prototype')+"</td>"+
+                    "<td>"+ 
+                          "<a href='#' class='btn bg-gray-900 text-gray-100 mb-1 mt-1' style='color:black; float:right;'onclick='deleteItem($(this));return false;'><i class='fa fa-trash'></i></a>"+ 
+                    "</td>"+ 
+                  "</tr>"; 
+            console.log(index); 
+            // Replace '__name__' in the prototype's HTML to 
+            // instead be a number based on how many items we have 
+            var newForm = prototype.replace(/__name__/g, index); 
+ 
+            // increase the index with one for the next item 
+            $collectionHolder.data('index', index + 1); 
+ 
+            // Display the form in the page in an li, before the "Add a tag" link li 
+            var $newform = $collectionHolder.find("tbody").append(newForm); 
+        } 
+ 
+        function deleteItem(item){ 
+            item.parent().parent().remove(); 
+        } 
+
+ 
+
+
+     </script>

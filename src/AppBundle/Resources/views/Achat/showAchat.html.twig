@@ -1,0 +1,121 @@
+{% extends "base.html.twig" %}
+
+{% block menu%}
+    {% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <div id="content">
+
+
+        <div class="container-fluid mt-5">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-5">
+            <h1 class="h3 mb-0 text-gray-800">
+                Date : {{achat.creeLe|date('d/m/Y')}}
+                <a href="{{ path('creerModifierAchat', {'id':achat.id}) }}" class="btn btn-primary" style="color:white;"><i class="fas fa-edit"></i></a>
+                <a href="{{ path('deleteAchat', {'id':achat.id}) }}" onclick="return confirm('Tu es sure de vouloir supprimer cet achat ?')" class="btn bg-gray-800" style="color:white;"><i class="fas fa-trash"></i></a>
+            </h1>
+            <h2>
+
+            </h2>
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                <a href="#" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">{{ flashMessage }}</span>
+                  </a>
+            {% endfor %}
+          </div>
+          <div class="row">
+              <div class="col-lg-4">
+              <center>
+                <h4 class="h3 mb-0 bg-gradient-primary text-gray-100">
+                    Achat : <b>A{{achat.id}}</b> 
+                </h4>
+              </center>
+                
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                         Fournisseur :<h6 class="m-0 font-weight-bold text-primary">{{achat.fournisseur}}</h6>
+                    </div>
+                </div>
+                    
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                         Avance :<h6 class="m-0 font-weight-bold text-primary">{{achat.avance}} DH</h6>
+                    </div>
+                </div>
+                    
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                         Dernière modification :<h6 class="m-0 font-weight-bold text-primary">{{achat.modifieLe|date('d/m/Y')}}</h6>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-8">
+              <center>
+                <h4 class="h3 mb-0 bg-gradient-primary text-gray-100">
+                     Total : {{achat.total}} DH
+                </h4>
+              </center>
+              
+                <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Produit</th>
+                      <th>Quantité</th>
+                      <th>Prix</th>
+
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Produit</th>
+                      <th>Quantité</th>
+                      <th>Prix</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                      {% for element in achat.elements %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('showProduit', {'id':element.produit.id}) }}">
+                                    <b>{{element.produit.libelle}} : {{element.produit.reference}}</b>
+                                </a>
+                            </td>
+                            <td>{{element.quantite}}</td>
+                            <td>{{element.prix}} DH</td>
+                        </tr>
+                      {%endfor%}
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+                
+            </div>
+          </div>
+                    
+            </div>
+                    
+            
+          
+
+                    
+        </div>
+
+      </div>
+    </div>
+       
+{% endblock %}

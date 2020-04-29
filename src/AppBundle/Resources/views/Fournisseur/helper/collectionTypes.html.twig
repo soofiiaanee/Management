@@ -1,0 +1,66 @@
+{# collection jquery#}
+  <script type="text/javascript">
+ $(document).ready(function() {
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $container_participant = $('div#appbundle_fournisseur_types');
+
+    // On ajoute un lien pour ajouter une nouvelle participant
+    var $addLink_participant = $('<a href="#" id="add_type" class="btn bg-gradient-primary text-gray-100" style=""><i class="fas fa-plus-square"></i></a>');
+    $container_participant.prepend($addLink_participant);
+
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $addLink_participant.click(function(e) {
+      addEmergency($container_participant);
+      e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+      return false;
+    });
+
+    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+    var index = $container_participant.find(':input').length;
+
+    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+    if (index == 0) {
+     // addDiplome($container_participant);
+    } else {
+      // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+     $container_participant.children('div').each(function() {
+      EmergencyDeleteLink($(this));
+      });
+    }
+
+    // La fonction qui ajoute un formulaire Categorie
+    function addEmergency($container_participant) {
+      // Dans le contenu de l'attribut « data-prototype », on remplace :
+      // - le texte "__name__label__" qu'il contient par le label du champ
+      // - le texte "__name__" qu'il contient par le numéro du champ
+      var $prototype = $($container_participant.attr('data-prototype').replace(/__name__label__/g, '')
+          .replace(/__name__/g, index));
+
+      // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+      EmergencyDeleteLink($prototype);
+
+      // On ajoute le prototype modifié à la fin de la balise <div>
+       $container_participant.append($prototype);
+
+      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+      index++;
+    }
+
+    // La fonction qui ajoute un lien de suppression d'une catégorie
+    function EmergencyDeleteLink($prototype) {
+      // Création du lien
+      $deleteLink = $('<a href="#" class="btn bg-gray-900 text-gray-100 mb-1 mt-1" style="color:black; float:right;"><i class="fa fa-trash"></i></a>');
+
+      // Ajout du lien
+      $prototype.prepend($deleteLink);
+
+      // Ajout du listener sur le clic du lien
+      $deleteLink.click(function(e) {
+        $prototype.remove();
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        return false;
+      });
+    }
+  });
+</script>
+ 

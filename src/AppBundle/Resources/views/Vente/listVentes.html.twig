@@ -1,0 +1,131 @@
+{% extends "base.html.twig" %}
+
+{% block menu%}
+    {% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid mt-3">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Liste des ventes</h1>
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                <a href="#" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">{{ flashMessage }}</span>
+                  </a>
+            {% endfor %}
+            <a href="{{path('creerModifierVente')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus-square"></i> Nouvelle vente</a>
+          </div>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              
+            <a href="{{path('listVentes')}}" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-list"></i>
+                    </span>
+                    <span class="text">Toutes les ventes</span>
+                  </a>
+              
+              <a href="{{path('listVentesImpayes')}}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    <span class="text">Les ventes impayées</span>
+                  </a>
+              <a href="{{path('listVentesPayes')}}" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Les ventes payées</span>
+                  </a>
+          </div>
+          
+            <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Code Vente</th>
+                      <th>Date</th>
+                      <th>Total</th>
+                      <th>Client</th>
+                      <th>Etat</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Code Vente</th>
+                      <th>Date</th>
+                      <th>Total</th>
+                      <th>Client</th>
+                      <th>Etat</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                      {% for vente in ventes %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('showVente', {'id':vente.id}) }}">
+                                    <b>V{{vente.id}}</b>
+                                </a>
+                            </td>
+                            <td>{{vente.creeLe|date('d/m/Y')}}</td>
+                            <td>{{vente.total}} DH</td>
+                            <td>{{vente.client.societe}}</td>
+                            <td>
+                                {%if vente.paye == true %}
+                                    <a class="btn btn-success btn-icon-split text-gray-100">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">Payée</span>
+                                    </a>
+                                {%else%}
+                                    <a class="btn btn-secondary btn-icon-split text-gray-100">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                        <span class="text">Impayée</span>
+                                    </a>
+                                {%endif%}
+                            </td>
+                            <td>
+                                <center>
+                                    <a href="{{ path('creerModifierVente', {'id':vente.id}) }}" class="btn btn-primary" style="color:white;"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('deleteVente', {'id':vente.id}) }}" onclick="return confirm('Tu es sure de vouloir supprimer cette vente ?')" class="btn bg-gray-800" style="color:white;"><i class="fas fa-trash"></i></a>
+                                </center>
+                            </td>
+                        </tr>
+                      {%endfor%}
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+       
+{% endblock %}

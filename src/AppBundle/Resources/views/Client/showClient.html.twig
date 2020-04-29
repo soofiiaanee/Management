@@ -1,0 +1,137 @@
+{% extends "base.html.twig" %}
+
+{% block menu%}
+    {% include 'menu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <div id="content">
+
+
+        <div class="container-fluid mt-5">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-user"></i>
+                Code Client : {{client.code}}
+                <a href="{{ path('creerModifierClient', {'id':client.id}) }}" class="btn btn-primary" style="color:white;"><i class="fas fa-edit"></i></a>
+                <a href="{{ path('deleteClient', {'id':client.id}) }}" onclick="return confirm('Tu es sure de vouloir supprimer ce Client ?')" class="btn bg-gray-800" style="color:white;"><i class="fas fa-trash"></i></a>
+            </h1>
+            <h2>
+
+            </h2>
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                <a href="#" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">{{ flashMessage }}</span>
+                  </a>
+            {% endfor %}
+          </div>
+          
+          <div class="row">
+          
+          <div class="col-lg-4">
+              <center>
+                <h4 class="h3 mb-0 bg-gradient-primary text-gray-100">
+                    {{client.prenom}} {{client.nom}}
+                </h4>
+              </center>
+                
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    Société : <h6 class="m-0 font-weight-bold text-primary"><b>{{client.societe}}</b> </h6>
+                </div>
+            </div>
+                
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    Adresse : <h6 class="m-0 font-weight-bold text-primary">{{client.adresse}}</h6>
+                </div>
+            </div>
+            
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    Tél : <h6 class="m-0 font-weight-bold text-primary">{{client.tel}}</h6>
+                </div>
+            </div>
+                
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    Email : <h6 class="m-0 font-weight-bold text-primary">{{client.email}}</h6>
+                </div>
+            </div>
+                
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    Site Web : <h6 class="m-0 font-weight-bold text-primary">{{client.siteWeb}}</h6>
+                </div>
+            </div>
+
+            </div>
+
+                      <div class="col-lg-8">
+              <center>
+                <h4 class="h3 mb-0 bg-gradient-primary text-gray-100">
+                    Ventes
+                </h4>
+              </center>
+              
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Code Vente</th>
+                      <th>Date</th>
+                      <th>Total</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Code Vente</th>
+                      <th>Date</th>
+                      <th>Total</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                      {% for element in client.ventes %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('showVente', {'id':element.id}) }}">
+                                    <b>V{{element.id}}</b>
+                                </a>
+                            </td>
+                            <td>{{element.creeLe|date('d/m/Y')}}</td>
+                            <td>{{element.total}} DH</td>
+                            <td>
+                                <center>
+                                    <a href="{{ path('creerModifierVente', {'id':element.id}) }}" class="btn btn-primary" style="color:white;"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('deleteVente', {'id':element.id}) }}" onclick="return confirm('Tu es sure de vouloir supprimer cette vente ?')" class="btn bg-gray-800" style="color:white;"><i class="fas fa-trash"></i></a>
+                                </center>
+                            </td>
+                        </tr>
+                      {%endfor%}                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>              
+            </div>
+                  
+                
+          </div>          
+        </div>
+
+      </div>
+    </div>
+       
+{% endblock %}

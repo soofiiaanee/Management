@@ -1,0 +1,104 @@
+{% extends "base.html.twig" %}
+
+{%block css%}
+{%endblock%}
+
+
+{% block menu %}
+    {% include 'menu.html.twig' %}
+{% endblock%}
+
+{% block content %}
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid mt-5">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Tableau de bord</h1>
+          </div>
+          
+          <div class="row">
+
+          <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Produits en rupture de stock</h6>
+                </div>
+                {%if produits is not empty %}
+                    {%for produit in produits %}  
+                        <div class="card-body">
+                            <a href="{{ path('showProduit', {'id':produit.id}) }}">
+                                <h4 class="small font-weight-bold">
+                                    {{produit.libelle}} : {{produit.Reference}} 
+                                    <span class="float-right">Stock : 0</span>
+                                </h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 1%"></div>
+                                </div>
+                            </a>   
+                        </div>
+                    {%endfor%}
+                {%else%}
+                    <center>
+                        <h4 class="small font-weight-bold mt-3 mb-2">Aucun produit est en rupture de stock</h4>
+                    </center>
+                    
+                {%endif%}
+                
+              </div>
+            </div>
+                
+          <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Ventes Impayées</h6>
+                </div>
+                {%if factures is not empty %}
+                    {%for facture in factures %}  
+                        <div class="card-body">
+                            <a href="{{ path('showVente', {'id':facture.id}) }}">
+                                <h4 class="small font-weight-bold mt-1">
+                                    {{facture.client.societe}} 
+                                    <span class="float-right">Total : {{facture.total}} DH</span>
+                                </h4>
+                                <hr style="margin-top: 1px;margin-bottom: -12px;">
+                            </a>   
+                        </div>
+                    {%endfor%}
+                {%else%}
+                    <center>
+                        <h4 class="small font-weight-bold mt-3 mb-2">Toutes les ventes sont payées</h4>
+                    </center>
+                    
+                {%endif%}
+                
+              </div>
+            </div>
+           
+                
+          </div>
+        </div>
+
+    </div>
+
+   </div>
+
+{% endblock %}
+
+{% block javasripts%}
+    
+    <script>
+
+    </script>
+
+
+    
+{% endblock%}
